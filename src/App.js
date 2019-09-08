@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Inputs from './Inputs';
+import Buttons from './Buttons'
+import Results from './Results'
 
 function App() {
+  const [startAt, setStartAt] = useState(10);
+  const [endingIn, setEndingIn] = useState(1)
+  const [results, setResults] = useState({});
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        L-prime UI
       </header>
+      <Inputs {...{ startAt, endingIn, setStartAt, setEndingIn }} />
+      <Buttons {...{ startAt, endingIn, setResults }} />
+      <hr></hr>
+      <Results {...{ results }} />
     </div>
   );
 }
