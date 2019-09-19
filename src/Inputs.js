@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ startAt, setStartAt, setEndingIn }) => <div className="row">
+export default ({ startAt, setStartAt, setEndingIn, iterations, setIterations }) => <div className="row">
   <div className="column">
     <label>Start At: <input defaultValue={startAt} type="number" onChange={(e) => setStartAt(e.target.value)}></input></label>
   </div><div className="column">
@@ -11,4 +11,7 @@ export default ({ startAt, setStartAt, setEndingIn }) => <div className="row">
       <option value="9">9</option>
     </select>
     </label></div>
+  <div className="column">
+    <label>iterations: <input defaultValue={iterations} type="number" onChange={(e) => setIterations(e.target.value)} style={{ width: '3rem' }}></input></label>
+  </div>
 </div>
