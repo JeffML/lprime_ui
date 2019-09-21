@@ -7,7 +7,7 @@ import Results from './Results'
 function App() {
   const [startAt, setStartAt] = useState(10);
   const [endingIn, setEndingIn] = useState(1)
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState({ totalTime: "0", responses: [] });
   const [iterations, setIterations] = useState(1);
   const [factorize, setFactorize] = useState(false)
 

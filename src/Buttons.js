@@ -6,7 +6,7 @@ const getPrime = ({ startAt, endingIn, iterations, setResults, factorize }) => {
   fetch(url, {})
     // .then(response => { console.log({ response }); return response; })
     .then(response => response.json())
-    // .then(json => { console.dir(json); return json })
+    .then(json => { console.log('fetch', json); return json })
     .then(json => setResults(json))
     .catch(e => console.error(e.toString()))
 }
