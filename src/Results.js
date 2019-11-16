@@ -25,7 +25,7 @@ function filterDupes(primes) {
 }
 
 const Responses = ({ primes }) => {
-
+  console.log("primes>>>>>", primes)
   return primes.map((result, i) => {
     const { prime, time, factors } = result;
     const falsePrime = factors && factors.includes('*')
@@ -48,10 +48,19 @@ const Responses = ({ primes }) => {
   });
 }
 
-export default ({ results }) => {
-  console.log({ results })
+export default ({ results, method }) => {
+  console.log({ results, method })
   const { totalTime, responses } = results;
-  const { sumOfPrimeTimes, uniqPrimes } = filterDupes(responses)
+  
+  if (method === 'old' && Array.isArray(responses)) {
+    var { sumOfPrimeTimes, uniqPrimes } = filterDupes(responses)
+  } else if (responses.primes) {
+    sumOfPrimeTimes = totalTime;
+    const factors = responses.factors;
+    uniqPrimes = (responses.primes || []).map((prime,i) => ({prime, factors: factors[i]}));
+  } else {
+    return null;
+  }
 
   return <div>
     <div className="row">

@@ -21,9 +21,9 @@ function App() {
       <Inputs {...{ startAt, endingIn, setStartAt, setEndingIn, 
         iterations, setIterations, factorize, setFactorize,
         method, setMethod }} />
-      <Buttons {...{ startAt, endingIn, iterations, setResults, factorize }} />
+      <Buttons {...{ startAt, endingIn, iterations, setResults, factorize, method }} />
       <hr></hr>
-      <Results {...{ results }} />
+      <Results {...{ results, method }} />
     </div>
   );
 }
