@@ -57,7 +57,7 @@ export default ({ results, method }) => {
   } else if (responses.primes) {
     sumOfPrimeTimes = totalTime;
     const factors = responses.factors;
-    uniqPrimes = (responses.primes || []).map((prime,i) => ({prime, factors: factors[i]}));
+    uniqPrimes = (responses.primes || []).map((prime,i) => ({prime, factors: factors && factors[i]}));
   } else {
     return null;
   }
