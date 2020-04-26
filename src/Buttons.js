@@ -1,7 +1,7 @@
 import React from 'react';
 
 const getOldPrime = ({ startAt, endingIn, iterations, setResults, factorize }) => {
-  const url = `https://lprime.netlify.com/.netlify/functions/primes?startAt=${startAt}&endingIn=${endingIn}&iterations=${iterations}${factorize ? '&factorize=1' : ''}`;
+  const url = `https://lprime.netlify.app/.netlify/functions/primes?startAt=${startAt}&endingIn=${endingIn}&iterations=${iterations}${factorize ? '&factorize=1' : ''}`;
 
   fetch(url, {})
     .then(response => response.json())
@@ -11,7 +11,7 @@ const getOldPrime = ({ startAt, endingIn, iterations, setResults, factorize }) =
 }
 
 const getNewPrime = ({ startAt, endingIn, iterations, setResults, factorize }) => {
-  const url = `https://lprime.netlify.com/.netlify/functions/primes-gen-no-dupes?startAt=${startAt}&endingIn=${endingIn}&iterations=${iterations}${factorize ? '&factorize=1' : ''}`;
+  const url = `https://lprime.netlify.app/.netlify/functions/primes-gen-no-dupes?startAt=${startAt}&endingIn=${endingIn}&iterations=${iterations}${factorize ? '&factorize=1' : ''}`;
 
   fetch(url, {})
     .then(response => response.json())
