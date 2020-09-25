@@ -28,6 +28,7 @@ function filterDupes(primes) {
   );
 }
 
+// eslint-disable-next-line no-unused-vars
 const Responses = ({ primes }) => {
   return primes.map((result, i) => {
     const { prime, time, factors } = result;

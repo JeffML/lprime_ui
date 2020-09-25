@@ -21,7 +21,7 @@ const getNewPrime = ({ startAt, endingIn, iterations, setResults, factorize }) =
 }
 
 const getPrime = args => {
-  if (args.method === 'old') {
+  if (!args.method || args.method === 'old') {
     getOldPrime(args);
   } else {
     getNewPrime(args);
