@@ -1,4 +1,5 @@
-/* global BigInt */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import React from "react";
 
 const color = row => (row % 2 ? "#C3C4C5" : "#F5F3F3");
@@ -10,23 +11,6 @@ const nanoToSec = time => {
   var fTime = parseFloat(`${sec}.${dec}`).toFixed(9);
   return fTime;
 };
-
-const ZERO = BigInt(0);
-
-function filterDupes(primes) {
-  return primes.reduce(
-    (acc, r) => {
-      const lastPrime =
-        acc.uniqPrimes.length && acc.uniqPrimes.slice(-1)[0].prime;
-      if (r.prime !== lastPrime) {
-        acc.sumOfPrimeTimes += BigInt(r.time);
-        acc.uniqPrimes.push(r);
-      }
-      return acc;
-    },
-    { sumOfPrimeTimes: ZERO, uniqPrimes: [] }
-  );
-}
 
 // eslint-disable-next-line no-unused-vars
 const Responses = ({ primes }) => {
@@ -67,10 +51,10 @@ const Responses = ({ primes }) => {
 export default ({ results, method }) => {
   console.log({ results, method });
   const { totalTime, responses } = results;
+  let sumOfPrimeTimes;
+  let uniqPrimes;
 
-  if (method === "old" && Array.isArray(responses)) {
-    var { sumOfPrimeTimes, uniqPrimes } = filterDupes(responses);
-  } else if (responses.primes) {
+   if (responses.primes) {
     sumOfPrimeTimes = totalTime;
     const factors = responses.factors;
     uniqPrimes = (responses.primes || []).map((prime, i) => ({

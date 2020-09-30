@@ -6,24 +6,22 @@ import Buttons from './Buttons'
 import Results from './Results'
 
 function App() {
-  const [startAt, setStartAt] = useState(10);
-  const [endingIn, setEndingIn] = useState(1)
+  const [aval, setAval] = useState(1);
+  const [nval, setNval] = useState(29)
   const [results, setResults] = useState({ totalTime: "0", responses: [] });
-  const [iterations, setIterations] = useState(1);
+  const [numPrimes, setNumPrimes] = useState(1);
   const [factorize, setFactorize] = useState(false)
-  const [method, setMethod] = useState('old')
 
   return (
     <div className="App">
       <header className="App-header">
         L-prime UI
       </header>
-      <Inputs {...{ startAt, endingIn, setStartAt, setEndingIn, 
-        iterations, setIterations, factorize, setFactorize,
-        method, setMethod }} />
-      <Buttons {...{ startAt, endingIn, iterations, setResults, factorize, method }} />
+      <Inputs {...{ aval, nval, setAval, setNval, 
+        numPrimes, setNumPrimes, factorize, setFactorize }} />
+      <Buttons {...{ aval, nval, numPrimes, setResults, factorize, }} />
       <hr></hr>
-      <Results {...{ results, method }} />
+      <Results {...{ results, }} />
     </div>
   );
 }
