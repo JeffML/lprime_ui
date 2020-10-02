@@ -6,8 +6,10 @@ import Buttons from './Buttons'
 import Results from './Results'
 
 function App() {
-  const [aval, setAval] = useState(1);
+  const [aval, setAval] = useState(1)
   const [nval, setNval] = useState(29)
+  const [cval, setCval] = useState(25)
+  const [dval, setDval] = useState(29)
   const [results, setResults] = useState({ totalTime: "0", responses: {} });
   const [numPrimes, setNumPrimes] = useState(1);
   const [factorize, setFactorize] = useState(false)
@@ -17,9 +19,9 @@ function App() {
       <header className="App-header">
         L-prime UI
       </header>
-      <Inputs {...{ aval, nval, setAval, setNval, 
+      <Inputs {...{ aval, nval, setAval, setNval, cval, setCval, dval, setDval,
         numPrimes, setNumPrimes, factorize, setFactorize }} />
-      <Buttons {...{ aval, nval, numPrimes, setResults, factorize, }} />
+      <Buttons {...{ aval, nval, cval, dval, numPrimes, setResults, factorize, }} />
       <hr></hr>
       <Results {...{ results, }} />
     </div>

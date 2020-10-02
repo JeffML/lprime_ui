@@ -18,6 +18,9 @@ const Responses = ({ primes, times, factors }) => {
     const time = times[i]
     const factor = factors && factors[i]
     const falsePrime = factor && factor.includes("*");
+    const numFormat = (n) => {
+        return n.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
 
     if (time) {
       var fTime = nanoToSec(time);
@@ -33,11 +36,11 @@ const Responses = ({ primes, times, factors }) => {
         key={prime}
       >
         <div className="column">
-          <span>Prime: {prime}</span>
+          <span>Prime: {numFormat(prime)}</span>
           <br></br>
         </div>
         <div className="column">
-          <span>Time: {fTime}</span>
+          <span>Time(sec): {fTime}</span>
         </div>
         {factors && falsePrime? (
           <div className="column">
