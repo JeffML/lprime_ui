@@ -1,9 +1,10 @@
 import React from 'react';
 
 const getNewPrime = ({ aval, nval, numPrimes, setResults, factorize }) => {
-  const url = `https://lprime.netlify.app/.netlify/functions/primes?aval=${aval}&nval=${nval}&numPrimes=${numPrimes}${factorize ? '&factorize=1' : ''}`;
+  const FUNCTIONS = process.env.REACT_APP_FUNCTIONS || `https://lprime.netlify.app/`
+  const url = `${FUNCTIONS}.netlify/functions/primes?aval=${aval}&nval=${nval}&numPrimes=${numPrimes}${factorize ? '&factorize=1' : ''}`;
 
-  fetch(url, {})
+  fetch(url, {headers: {accept: "Accept: application/json"}})
     .then(response => response.json())
     .then(json => { console.log('fetch', json); return json })
     .then(json => setResults(json))

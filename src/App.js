@@ -8,7 +8,7 @@ import Results from './Results'
 function App() {
   const [aval, setAval] = useState(1);
   const [nval, setNval] = useState(29)
-  const [results, setResults] = useState({ totalTime: "0", responses: [] });
+  const [results, setResults] = useState({ totalTime: "0", responses: {} });
   const [numPrimes, setNumPrimes] = useState(1);
   const [factorize, setFactorize] = useState(false)
 

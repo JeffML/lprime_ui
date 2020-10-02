@@ -13,10 +13,11 @@ const nanoToSec = time => {
 };
 
 // eslint-disable-next-line no-unused-vars
-const Responses = ({ primes }) => {
-  return primes.map((result, i) => {
-    const { prime, time, factors } = result;
-    const falsePrime = factors && factors.includes("*");
+const Responses = ({ primes, times, factors }) => {
+  return primes.map((prime, i) => {
+    const time = times[i]
+    const factor = factors && factors[i]
+    const falsePrime = factor && factor.includes("*");
 
     if (time) {
       var fTime = nanoToSec(time);
@@ -38,9 +39,9 @@ const Responses = ({ primes }) => {
         <div className="column">
           <span>Time: {fTime}</span>
         </div>
-        {factors ? (
+        {factors && falsePrime? (
           <div className="column">
-            <span>Factors: {factors}</span>
+            <span>Factors: {factor}</span>
           </div>
         ) : null}
       </div>
@@ -48,20 +49,9 @@ const Responses = ({ primes }) => {
   });
 };
 
-export default ({ results, method }) => {
-  console.log({ results, method });
-  const { totalTime, responses } = results;
-  let sumOfPrimeTimes;
-  let uniqPrimes;
-
-   if (responses.primes) {
-    sumOfPrimeTimes = totalTime;
-    const factors = responses.factors;
-    uniqPrimes = (responses.primes || []).map((prime, i) => ({
-      prime,
-      factors: factors && factors[i]
-    }));
-  } else {
+export default ({ results }) => {
+  const { totalTime, primes } = results;
+   if (!primes) {
     return null;
   }
 
@@ -70,17 +60,11 @@ export default ({ results, method }) => {
       <div className="row">
         <div className="column">
           <span style={{ fontWeight: "bold" }}>
-            Total run time: {totalTime && nanoToSec(totalTime)}
-          </span>
-        </div>
-        <div className="column">
-          <span style={{ fontWeight: "bold" }}>
-            Sum of prime times:{" "}
-            {sumOfPrimeTimes && nanoToSec(sumOfPrimeTimes.toString())}
+            Total calculation time: {totalTime && nanoToSec(totalTime)}
           </span>
         </div>
       </div>
-      <Responses {...{ primes: uniqPrimes }} />
+      <Responses {...results} />
     </div>
   );
 };

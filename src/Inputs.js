@@ -14,7 +14,7 @@ import React from 'react';
         <label>numPrimes: <input defaultValue={numPrimes} type="number" onChange={(e) => setNumPrimes(e.target.value)} style={{ width: '3rem' }}></input></label>
       </div>
       <div className="column">
-        <label>factorize: <input defaultValue={factorize} type="checkbox" onChange={(e) => setFactorize(e.target.checked)} style={{ width: '3rem' }}></input></label>
+        <label>False prime check: <input defaultValue={factorize} type="checkbox" onChange={(e) => setFactorize(e.target.checked)} style={{ width: '3rem' }}></input></label>
       </div>
   </div>
 </>
