@@ -4,24 +4,27 @@ import './App.css';
 import Inputs from './Inputs';
 import Buttons from './Buttons'
 import Results from './Results'
+import Defaults from './Defaults'
 
 function App() {
   const [aval, setAval] = useState(1)
   const [nval, setNval] = useState(29)
   const [cval, setCval] = useState(25)
   const [dval, setDval] = useState(29)
+  const [magicNum, setMagicNum] = useState(223092870)
   const [results, setResults] = useState({ totalTime: "0", responses: {} });
   const [numPrimes, setNumPrimes] = useState(1);
-  const [factorize, setFactorize] = useState(false)
+  const [factorize, setFactorize] = useState(true)
 
   return (
     <div className="App">
       <header className="App-header">
         L-prime UI
       </header>
-      <Inputs {...{ aval, nval, setAval, setNval, cval, setCval, dval, setDval,
+      <Defaults {...{setAval, magicNum, setNval, setCval, setDval, setMagicNum}} />
+      <Inputs {...{ aval, nval, setAval, setNval, cval, setCval, dval, setDval, magicNum, setMagicNum,
         numPrimes, setNumPrimes, factorize, setFactorize }} />
-      <Buttons {...{ aval, nval, cval, dval, numPrimes, setResults, factorize, }} />
+      <Buttons {...{ aval, nval, cval, dval, magicNum, numPrimes, setResults, factorize, }} />
       <hr></hr>
       <Results {...{ results, }} />
     </div>
