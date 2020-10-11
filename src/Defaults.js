@@ -9,21 +9,21 @@ const Default = (args) => {
 </div>
 }
 
-const setDefaults = ({value, setAval, setNval, setCval, setDval, setMagicNum}) => {
+const setDefaults = ({value, setAval, setNval, setCval, setDval, setAdder}) => {
   switch (value) {
     case 'MINUS11': 
       setAval(1)
       setNval(29)
       setCval(13)
       setDval(17)
-      setMagicNum(2310)
+      setAdder(2310)
       break;
     case 'MINUS23': 
       setAval(1)
       setNval(29)
       setCval(25)
       setDval(29)
-      setMagicNum(223092870)
+      setAdder(223092870)
       break;
     default:
       break;

@@ -13,13 +13,11 @@ const nanoToSec = time => {
 };
 
 // eslint-disable-next-line no-unused-vars
-const Responses = ({ primes, times, factors }) => {
+const Responses = ({ primes, times }) => {
   return primes.map((prime, i) => {
-    const time = times[i]
-    const factor = factors && factors[i]
-    const falsePrime = factor && factor.includes("*");
+    const time = times[i].toString()
     const numFormat = (n) => {
-        return n.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
     if (time) {
@@ -30,7 +28,6 @@ const Responses = ({ primes, times, factors }) => {
         className="row"
         style={{
           maxHeight: "1.2rem",
-          color: falsePrime ? "red" : "black",
           backgroundColor: color(i)
         }}
         key={prime}
@@ -42,11 +39,6 @@ const Responses = ({ primes, times, factors }) => {
         <div className="column">
           <span>Time(sec): {fTime}</span>
         </div>
-        {factors && falsePrime? (
-          <div className="column">
-            <span>Factors: {factor}</span>
-          </div>
-        ) : null}
       </div>
     );
   });

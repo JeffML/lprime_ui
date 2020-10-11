@@ -11,20 +11,22 @@ function App() {
   const [nval, setNval] = useState(29)
   const [cval, setCval] = useState(25)
   const [dval, setDval] = useState(29)
-  const [magicNum, setMagicNum] = useState(223092870)
-  const [results, setResults] = useState({ totalTime: "0", responses: {} });
+  const [adder, setAdder] = useState(223092870)
   const [numPrimes, setNumPrimes] = useState(1);
-  const [factorize, setFactorize] = useState(true)
+  const [results, setResults] = useState([]);
+  const [totalPrimeTime, setTotalPrimeTime] = useState(0)
+  const args = { aval, nval, cval, dval, adder, numPrimes}
 
   return (
     <div className="App">
       <header className="App-header">
         L-prime UI
       </header>
-      <Defaults {...{setAval, magicNum, setNval, setCval, setDval, setMagicNum}} />
-      <Inputs {...{ aval, nval, setAval, setNval, cval, setCval, dval, setDval, magicNum, setMagicNum,
-        numPrimes, setNumPrimes, factorize, setFactorize }} />
-      <Buttons {...{ aval, nval, cval, dval, magicNum, numPrimes, setResults, factorize, }} />
+      <Defaults {...{setAval, adder, setNval, setCval, setDval, setAdder}} />
+      <Inputs {...{ aval, nval, setAval, setNval, cval, setCval, 
+        dval, setDval, adder, setAdder,
+        numPrimes, setNumPrimes, }} />
+      <Buttons {...{args, setResults, setTotalPrimeTime}} />
       <hr></hr>
       <Results {...{ results, }} />
     </div>

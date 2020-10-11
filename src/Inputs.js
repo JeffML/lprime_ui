@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars, react/display-name, react/prop-types */
 import React, {useEffect} from 'react';
 
-  export default ({ aval, setAval, nval, setNval, cval, setCval, dval, setDval, magicNum, setMagicNum,
+  export default ({ aval, setAval, nval, setNval, cval, setCval, dval, setDval, adder, setAdder,
       numPrimes, setNumPrimes, factorize, setFactorize }) => {
       
   return <>
@@ -24,7 +24,7 @@ import React, {useEffect} from 'react';
       </div><div className="column">
         <label>D: <input type="number" value={dval} onChange={(e) => setDval(e.target.value)}></input></label>
       </div>
-      <div className="column"><label>Magic Number: <input value={magicNum} type="number" onChange={(e) => setMagicNum(e.target.value)}></input></label></div>
+      <div className="column"><label>Magic Number: <input value={adder} type="number" onChange={(e) => setAdder(e.target.value)}></input></label></div>
       <div className="column"></div>
   </div>
 </>
