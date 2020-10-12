@@ -32,6 +32,8 @@ const calcPrimes = ({aval:A, nval:N, cval:C, dval:D, adder, numPrimes}, setResul
   const primes = [];
   const times = [];
 
+  setResults({primes, times})
+
   let func; // current func reference
   let then  // start time of new prime search
 

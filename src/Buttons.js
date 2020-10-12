@@ -6,7 +6,6 @@ export default ({args, setResults, setTotalPrimeTime}) => {
   
   const action = (args) => {
     setEnabled(false)
-    setResults([])
     const {totalPrimeTime} = fPrimes(args, setResults)
     setTotalPrimeTime(totalPrimeTime)
     setEnabled(true)
@@ -14,7 +13,7 @@ export default ({args, setResults, setTotalPrimeTime}) => {
   
   return <div className="row">
   <div className="double-column">
-    <input type="button" value={enabled? "Submit" : "Submitted"} disabled={!enabled} onClick={() => action(args)}></input>
+    <input type="button" value="Submit" disabled={!enabled} onClick={() => action(args)}></input>
   </div>
 </div>
 }

@@ -12,10 +12,7 @@ import React, {useEffect} from 'react';
         <label>N: <input type="number" value={nval} onChange={(e) => setNval(e.target.value)}></input></label>
       </div>
       <div className="column">
-        <label>numPrimes: <input defaultValue={numPrimes} type="number" onChange={(e) => setNumPrimes(e.target.value)} style={{ width: '3rem' }}></input></label>
-      </div>
-      <div className="column">
-        <label>False prime check: <input checked={factorize} type="checkbox" onChange={(e) => setFactorize(e.target.checked)} style={{ width: '3rem' }}></input></label>
+        <label># of primes: <input defaultValue={numPrimes} type="number" onChange={(e) => setNumPrimes(e.target.value)} style={{ width: '3rem' }}></input></label>
       </div>
   </div>
   <div className="row">
@@ -24,8 +21,7 @@ import React, {useEffect} from 'react';
       </div><div className="column">
         <label>D: <input type="number" value={dval} onChange={(e) => setDval(e.target.value)}></input></label>
       </div>
-      <div className="column"><label>Magic Number: <input value={adder} type="number" onChange={(e) => setAdder(e.target.value)}></input></label></div>
-      <div className="column"></div>
+      <div className="column"><label>Adder: <input value={adder} type="number" onChange={(e) => setAdder(e.target.value)}></input></label></div>
   </div>
 </>
       }

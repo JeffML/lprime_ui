@@ -5,7 +5,7 @@ import React from "react";
 const color = row => (row % 2 ? "#C3C4C5" : "#F5F3F3");
 
 const nanoToSec = time => {
-  var pTime = time.padStart(10, 0);
+  var pTime = time.toString().padStart(10, 0);
   var dec = pTime.slice(-9);
   var sec = pTime.slice(0, pTime.length - 9);
   var fTime = parseFloat(`${sec}.${dec}`).toFixed(9);
@@ -13,7 +13,11 @@ const nanoToSec = time => {
 };
 
 // eslint-disable-next-line no-unused-vars
-const Responses = ({ primes, times }) => {
+const Responses = ({ primes, times}) => {
+  if (!primes.length) {
+    return <div className="row">Calculating...</div>
+  }
+
   return primes.map((prime, i) => {
     const time = times[i].toString()
     const numFormat = (n) => {
@@ -27,7 +31,7 @@ const Responses = ({ primes, times }) => {
       <div
         className="row"
         style={{
-          maxHeight: "1.2rem",
+          maxHeight: "3.4rem",
           backgroundColor: color(i)
         }}
         key={prime}
@@ -44,8 +48,8 @@ const Responses = ({ primes, times }) => {
   });
 };
 
-export default ({ results }) => {
-  const { totalTime, primes } = results;
+export default ({ results, totalPrimeTime }) => {
+  const { primes } = results;
    if (!primes) {
     return null;
   }
@@ -55,7 +59,7 @@ export default ({ results }) => {
       <div className="row">
         <div className="column">
           <span style={{ fontWeight: "bold" }}>
-            Total calculation time: {totalTime && nanoToSec(totalTime)}
+            Total calculation time: {totalPrimeTime && nanoToSec(totalPrimeTime)}
           </span>
         </div>
       </div>
