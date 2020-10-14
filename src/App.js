@@ -5,14 +5,13 @@ import Inputs from "./Inputs";
 import Buttons from "./Buttons";
 import Results from "./Results";
 import FalsePrimes from "./FalsePrimes.js";
-import Defaults from "./Defaults";
 
 function App() {
-  const [aval, setAval] = useState(1);
-  const [nval, setNval] = useState(29);
-  const [cval, setCval] = useState(25);
-  const [dval, setDval] = useState(29);
-  const [adder, setAdder] = useState(223092870);
+  const [aval, setAval] = useState(0);
+  const [nval, setNval] = useState(0);
+  const [cval, setCval] = useState(0);
+  const [dval, setDval] = useState(0);
+  const [adder, setAdder] = useState(0);
   const [numPrimes, setNumPrimes] = useState(1);
   const [results, setResults] = useState({});
   const [totalPrimeTime, setTotalPrimeTime] = useState(0);
@@ -21,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">L-prime UI</header>
-      <Defaults {...{ setAval, adder, setNval, setCval, setDval, setAdder }} />
+
       <Inputs
         {...{
           aval,

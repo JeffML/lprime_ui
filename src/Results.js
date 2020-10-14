@@ -2,9 +2,9 @@
 /* eslint-disable react/display-name */
 import React from "react";
 
-const color = row => (row % 2 ? "#C3C4C5" : "#F5F3F3");
+const color = (row) => (row % 2 ? "#C3C4C5" : "#F5F3F3");
 
-const nanoToSec = time => {
+const nanoToSec = (time) => {
   var pTime = time.toString().padStart(10, 0);
   var dec = pTime.slice(-9);
   var sec = pTime.slice(0, pTime.length - 9);
@@ -13,18 +13,19 @@ const nanoToSec = time => {
 };
 
 // eslint-disable-next-line no-unused-vars
-const Responses = ({ primes, times}) => {
+const Responses = ({ primes, times }) => {
   if (!primes.length) {
-    return <div className="row">Calculating...</div>
+    return <div className="row">Calculating...</div>;
   }
 
   return primes.map((prime, i) => {
-    const time = times[i].toString()
+    let time = times[i].toString();
     const numFormat = (n) => {
-        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
+      return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
 
     if (time) {
+      if (navigator.userAgent.includes("Firefox")) time *= 10000;
       var fTime = nanoToSec(time);
     }
     return (
@@ -32,7 +33,7 @@ const Responses = ({ primes, times}) => {
         className="row"
         style={{
           maxHeight: "3.4rem",
-          backgroundColor: color(i)
+          backgroundColor: color(i),
         }}
         key={prime}
       >
@@ -50,7 +51,7 @@ const Responses = ({ primes, times}) => {
 
 export default ({ results, totalPrimeTime }) => {
   const { primes } = results;
-   if (!primes) {
+  if (!primes) {
     return null;
   }
 
@@ -59,7 +60,8 @@ export default ({ results, totalPrimeTime }) => {
       <div className="row">
         <div className="column">
           <span style={{ fontWeight: "bold" }}>
-            Total calculation time: {totalPrimeTime && nanoToSec(totalPrimeTime)}
+            Total calculation time:{" "}
+            {totalPrimeTime && nanoToSec(totalPrimeTime)}
           </span>
         </div>
       </div>

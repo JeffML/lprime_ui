@@ -24,6 +24,7 @@ export default ({ primes }) => {
 
   const Factors = () => {
     return factors.map(({ falsePrime, factors }) => {
+      if (factors.length === 0) alert("No factors found");
       return (
         <div className="row">
           <div className="column">
