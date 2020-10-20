@@ -23,7 +23,7 @@ export default ({
             A:{" "}
             <input
               type="number"
-              value={aval}
+              value={aval || ""}
               onChange={(e) => setAval(e.target.value)}
             ></input>
           </label>
@@ -33,7 +33,7 @@ export default ({
             N:{" "}
             <input
               type="number"
-              value={nval}
+              value={nval || ""}
               onChange={(e) => setNval(e.target.value)}
             ></input>
           </label>
@@ -56,7 +56,7 @@ export default ({
             C:{" "}
             <input
               type="number"
-              value={cval}
+              value={cval || ""}
               onChange={(e) => setCval(e.target.value)}
             ></input>
           </label>
@@ -66,16 +66,16 @@ export default ({
             D:{" "}
             <input
               type="number"
-              value={dval}
+              value={dval || ""}
               onChange={(e) => setDval(e.target.value)}
             ></input>
           </label>
         </div>
         <div className="column">
           <label>
-            Adder:{" "}
+            Z:{" "}
             <input
-              value={adder}
+              value={adder || ""}
               type="number"
               onChange={(e) => setAdder(e.target.value)}
             ></input>

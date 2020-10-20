@@ -7,11 +7,11 @@ import Results from "./Results";
 import FalsePrimes from "./FalsePrimes.js";
 
 function App() {
-  const [aval, setAval] = useState(0);
-  const [nval, setNval] = useState(0);
-  const [cval, setCval] = useState(0);
-  const [dval, setDval] = useState(0);
-  const [adder, setAdder] = useState(0);
+  const [aval, setAval] = useState(0); //useState(1);
+  const [nval, setNval] = useState(0); //useState(31);
+  const [cval, setCval] = useState(0); //useState(7);
+  const [dval, setDval] = useState(0); //useState(11);
+  const [adder, setAdder] = useState(0); //useState(2310);
   const [numPrimes, setNumPrimes] = useState(1);
   const [results, setResults] = useState({});
   const [totalPrimeTime, setTotalPrimeTime] = useState(0);

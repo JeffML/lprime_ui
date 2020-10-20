@@ -10,11 +10,21 @@ function factor(n) {
 
 // find the least factor in n by trial division
 function leastFactor(n) {
-  if (n === 0n) return 0n;
-  if (n % 1n || n * n < 2n) return 1n;
-  if (n % 2n === 0n) return 2n;
-  if (n % 3n === 0n) return 3n;
-  if (n % 5n === 0n) return 5n;
+  const retval =
+    n === 0n
+      ? 0n
+      : n % 1n || n * n < 2n
+      ? 1n
+      : n % 2n === 0n
+      ? 2n
+      : n % 3n === 0n
+      ? 3n
+      : n % 5n === 0n
+      ? 5n
+      : null;
+
+  if (retval) return retval;
+
   var m = isqrt(n);
   for (var i = 7n; i <= m; i += 30n) {
     if (n % i === 0n) return i;

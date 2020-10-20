@@ -20,8 +20,9 @@ const Responses = ({ primes, times }) => {
 
   return primes.map((prime, i) => {
     let time = times[i].toString();
+
     const numFormat = (n) => {
-      return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return n.toString(); //.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
     if (time) {
