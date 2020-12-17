@@ -107,7 +107,6 @@ const calcPrimes = (
 
   do {
     if (dbgOn) dbg();
-    debugger;
     func();
   } while (func !== END);
 
