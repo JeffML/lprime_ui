@@ -7,15 +7,15 @@ import Results from "./Results";
 import FalsePrimes from "./FalsePrimes.js";
 
 function App() {
-  const [aval, setAval] = useState(0); //useState(1);
+  // const [aval, setAval] = useState(0); //useState(1);
   const [nval, setNval] = useState(0); //useState(31);
-  const [cval, setCval] = useState(0); //useState(7);
-  const [dval, setDval] = useState(0); //useState(11);
-  const [adder, setAdder] = useState(0); //useState(2310);
+  const [cval, setCval] = useState(7); //useState(7);
+  const [dval, setDval] = useState(11); //useState(11);
+  const [adder, setAdder] = useState(30); //useState(2310);
   const [numPrimes, setNumPrimes] = useState(1);
   const [results, setResults] = useState({});
   const [totalPrimeTime, setTotalPrimeTime] = useState(0);
-  const args = { aval, nval, cval, dval, adder, numPrimes };
+  const args = { /*aval,*/ nval, cval, dval, adder, numPrimes };
 
   return (
     <div className="App">
@@ -23,16 +23,16 @@ function App() {
 
       <Inputs
         {...{
-          aval,
+          // aval,
           nval,
-          setAval,
+          // setAval,
           setNval,
           cval,
-          setCval,
+          // setCval,
           dval,
-          setDval,
+          // setDval,
           adder,
-          setAdder,
+          // setAdder,
           numPrimes,
           setNumPrimes,
         }}

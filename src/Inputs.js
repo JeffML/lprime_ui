@@ -2,23 +2,23 @@
 import React, { useEffect } from "react";
 
 export default ({
-  aval,
-  setAval,
+  // aval,
+  // setAval,
   nval,
   setNval,
-  cval,
-  setCval,
-  dval,
-  setDval,
-  adder,
-  setAdder,
+  // cval,
+  // setCval,
+  // dval,
+  // setDval,
+  // adder,
+  // setAdder,
   numPrimes,
   setNumPrimes,
 }) => {
   return (
     <>
       <div className="row">
-        <div className="column" style={{ width: "10em" }}>
+        {/* <div className="column" style={{ width: "10em" }}>
           <label>
             A:{" "}
             <input
@@ -27,7 +27,7 @@ export default ({
               onChange={(e) => setAval(e.target.value)}
             ></input>
           </label>
-        </div>
+        </div> */}
         <div className="column">
           <label>
             N:{" "}
@@ -50,7 +50,7 @@ export default ({
           </label>
         </div>
       </div>
-      <div className="row">
+      {/* <div className="row">
         <div className="column" style={{ width: "10em" }}>
           <label>
             C:{" "}
@@ -81,7 +81,7 @@ export default ({
             ></input>
           </label>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

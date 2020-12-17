@@ -17,20 +17,20 @@ Input N can be any prime number >23 that ens in 1, 3, 7, or 9
 // Labeled "MINUS23" in Dad's spreadsheet
 /////////////////////////////////////////////
 const calcPrimes = (
-  { aval: A, nval: N, cval, dval, adder, numPrimes },
+  { /*aval: A,*/ nval: N, cval, dval, adder, numPrimes },
   setResults
 ) => {
   // (INPUT A, INPUT N, number of primes to generate)
-  A = BigInt(A);
+  // A = BigInt(A);
   N = BigInt(N);
-  const C = BigInt(cval);
-  const D = BigInt(dval);
-  let E;
-  let F;
-  let B;
+  let C = BigInt(cval);
+  let D = BigInt(dval);
+  // let E;
+  // let F;
+  let B = isqrt(N);
   const Z = BigInt(adder);
 
-  N = N + A * Z; // N + A*Z -> N
+  // N = N + A * Z; // N + A*Z -> N
 
   numPrimes = parseInt(numPrimes);
   const primes = [];
@@ -48,7 +48,7 @@ const calcPrimes = (
   const dbg = () => {
     console.log({
       func: func.name,
-      A,
+      // A,
       B,
       C,
       D,
@@ -65,12 +65,12 @@ const calcPrimes = (
 
   const lbl10 = () => {
     //LBL 10
-    if (N % E === 0n) return (func = lbl12); // if fPart(N/C)=0: Goto 12
-    if (E >= B) return (func = lbl11); // if C≥B: Goto 11
-    if (N % F === 0n) return (func = lbl12); // if fPart(N/D)=0: Goto 12
-    if (F >= B) return (func = lbl11); // if D≥B: Goto 11
-    E += 6n;
-    F += 6n;
+    if (N % C === 0n) return (func = lbl12); // if fPart(N/C)=0: Goto 12
+    if (C >= B) return (func = lbl11); // if C≥B: Goto 11
+    if (N % D === 0n) return (func = lbl12); // if fPart(N/D)=0: Goto 12
+    if (D >= B) return (func = lbl11); // if D≥B: Goto 11
+    C += 6n;
+    D += 6n;
     func = lbl10; // Goto 10
   };
 
@@ -84,15 +84,18 @@ const calcPrimes = (
     setResults({ primes, times });
 
     if (count === numPrimes) return (func = END); // N->P, Disp P (stops on requested number of primes)
-    func = lbl12; // rest of 11 is same as all of 12; so Goto 12
+    N += N * Z;
+    B = isqrt(N);
+    C = 7n;
+    D = 11n;
+    func = lbl10;
   };
 
   const lbl12 = () => {
     //LBL 12
     N += Z; // N + Z -> N
-    B = isqrt(N); // iPart(√(N)) -> B
-    E = C;
-    F = D;
+    C = 7n;
+    D = 11n;
     func = lbl10; // Goto 10
   };
 
@@ -100,7 +103,7 @@ const calcPrimes = (
   /* --MAIN-- */
   /* ******** */
 
-  func = lbl12; // start of function chain
+  func = lbl10; // start of function chain
 
   // loop until done...
   then = window.performance.now(); // in floating milliseconds
