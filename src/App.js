@@ -13,7 +13,9 @@ function App() {
   const [dval, setDval] = useState(11); //useState(11);
   const [adder, setAdder] = useState(30); //useState(2310);
   const [numPrimes, setNumPrimes] = useState(1);
-  const [results, setResults] = useState({});
+  const [primes, setPrimes] = useState([]);
+  const [times, setTimes] = useState([]);
+  // const [results, setResults] = useState({});
   const [totalPrimeTime, setTotalPrimeTime] = useState(0);
   const args = { /*aval,*/ nval, cval, dval, adder, numPrimes };
 
@@ -23,26 +25,21 @@ function App() {
 
       <Inputs
         {...{
-          // aval,
           nval,
-          // setAval,
           setNval,
           cval,
-          // setCval,
           dval,
-          // setDval,
           adder,
-          // setAdder,
           numPrimes,
           setNumPrimes,
         }}
       />
-      <Buttons {...{ args, setResults, setTotalPrimeTime }} />
+      <Buttons {...{ args, setPrimes, setTimes, setTotalPrimeTime }} />
       <hr></hr>
-      <Results {...{ results, totalPrimeTime }} />
+      <Results {...{ primes, times, totalPrimeTime }} />
       <div className="row"></div>
       <hr></hr>
-      <FalsePrimes {...{ primes: results.primes }} />
+      <FalsePrimes {...{ primes }} />
     </div>
   );
 }

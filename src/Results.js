@@ -50,8 +50,7 @@ const Responses = ({ primes, times }) => {
   });
 };
 
-export default ({ results, totalPrimeTime }) => {
-  const { primes } = results;
+export default ({ primes, times, totalPrimeTime }) => {
   if (!primes) {
     return null;
   }
@@ -66,7 +65,7 @@ export default ({ results, totalPrimeTime }) => {
           </span>
         </div>
       </div>
-      <Responses {...results} />
+      <Responses {...{ primes, times }} />
     </div>
   );
 };

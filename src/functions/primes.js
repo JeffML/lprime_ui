@@ -14,29 +14,23 @@ Input N can be any prime number >23 that ens in 1, 3, 7, or 9
 
 //////////////////////////////////////////////
 // this is the outer function, which initiates the calculations.
-// Labeled "MINUS23" in Dad's spreadsheet
 /////////////////////////////////////////////
 const calcPrimes = (
-  { /*aval: A,*/ nval: N, cval, dval, adder, numPrimes },
-  setResults
+  { nval: N, cval, dval, adder, numPrimes },
+  setPrimes,
+  setTimes
 ) => {
-  // (INPUT A, INPUT N, number of primes to generate)
-  // A = BigInt(A);
   N = BigInt(N);
   let C = BigInt(cval);
   let D = BigInt(dval);
-  // let E;
-  // let F;
   let B = isqrt(N);
   const Z = BigInt(adder);
-
-  // N = N + A * Z; // N + A*Z -> N
+  let times = [];
+  let primes = [];
 
   numPrimes = parseInt(numPrimes);
-  const primes = [];
-  const times = [];
-
-  setResults({ primes, times });
+  setPrimes([]);
+  setTimes([]);
 
   let func; // current func reference
   let then; // start time of new prime search
@@ -48,7 +42,6 @@ const calcPrimes = (
   const dbg = () => {
     console.log({
       func: func.name,
-      // A,
       B,
       C,
       D,
@@ -81,7 +74,8 @@ const calcPrimes = (
     then = now;
 
     const count = primes.push(N);
-    setResults({ primes, times });
+    setPrimes([...primes]);
+    setTimes([...times]);
 
     if (count === numPrimes) return (func = END); // N->P, Disp P (stops on requested number of primes)
     N += N * Z;
@@ -116,27 +110,28 @@ const calcPrimes = (
   return { primes, times };
 };
 
-const primes = (values, setResults, setTotalPrimeTime) => {
-  const { aval, nval, cval, dval, adder, numPrimes } = values;
+const primes = (values, setPrimes, setTimes) => {
+  const { nval, cval, dval, adder, numPrimes } = values;
 
   const responses = generatePrimes(
-    { aval, nval, cval, dval, adder, factorize: false, numPrimes },
-    setResults
+    { nval, cval, dval, adder, factorize: false, numPrimes },
+    setPrimes,
+    setTimes
   );
 
   return responses;
 };
 
-function generatePrimes(args, setResults) {
-  let { primes, times } = generatePrimesImpl(args, setResults);
+function generatePrimes(args, setPrimes, setTimes) {
+  let { primes, times } = generatePrimesImpl(args, setPrimes, setTimes);
 
   const totalPrimeTime = times.reduce((a, b) => a + b, 0.0);
 
   return { primes, times, totalPrimeTime };
 }
 
-function generatePrimesImpl(args, setResults) {
-  const { primes, times } = calcPrimes(args, setResults);
+function generatePrimesImpl(args, setPrimes, setTimes) {
+  const { primes, times } = calcPrimes(args, setPrimes, setTimes);
 
   const response = {
     primes,
