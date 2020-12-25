@@ -2,10 +2,8 @@
 
 import isqrt from "./isqrt";
 
-let dbgOn = false;
-
 /*
-Prime Number generator, circa 10-10-2020
+Prime Number generator, circa 12-20-2020
 
 This program produces multiple classes of prime numbers ending in 1, 3,7, or 9. 
 Input A can be andy Integer>=0. An increase yields higher primes in the class.
@@ -17,40 +15,20 @@ Input N can be any prime number >23 that ens in 1, 3, 7, or 9
 /////////////////////////////////////////////
 const calcPrimes = (
   { nval: N, cval, dval, adder, numPrimes },
-  setPrimes,
-  setTimes
+  addPrime,
+  addTime
 ) => {
   N = BigInt(N);
   let C = BigInt(cval);
   let D = BigInt(dval);
   let B = isqrt(N);
   const Z = BigInt(adder);
-  let times = [];
-  let primes = [];
 
   numPrimes = parseInt(numPrimes);
-  setPrimes([]);
-  setTimes([]);
+  let count = 0;
 
   let func; // current func reference
   let then; // start time of new prime search
-
-  const maxdbg = process.env.DBG ? parseInt(process.env.DBG) : 0;
-  let dbgCt = 0;
-  dbgOn = maxdbg !== 0;
-
-  const dbg = () => {
-    console.log({
-      func: func.name,
-      B,
-      C,
-      D,
-      N,
-      primes,
-    });
-    dbgCt++;
-    if (dbgCt >= maxdbg) process.exit();
-  };
 
   const END = () => {
     //marker function for end-of-processing
@@ -70,12 +48,11 @@ const calcPrimes = (
   const lbl11 = () => {
     //LBL 11
     const now = window.performance.now(); //floating milliseconds
-    times.push((now - then) / 1000);
+    const time = (now - then) / 1000;
     then = now;
-
-    const count = primes.push(N);
-    setPrimes([...primes]);
-    setTimes([...times]);
+    count++;
+    addPrime(N);
+    addTime(time);
 
     if (count === numPrimes) return (func = END); // N->P, Disp P (stops on requested number of primes)
     N += N * Z;
@@ -103,41 +80,26 @@ const calcPrimes = (
   then = window.performance.now(); // in floating milliseconds
 
   do {
-    if (dbgOn) dbg();
     func();
   } while (func !== END);
 
-  return { primes, times };
+  return;
 };
 
-const primes = (values, setPrimes, setTimes) => {
+const primes = ({ args: values, addPrime, addTime }) => {
   const { nval, cval, dval, adder, numPrimes } = values;
 
-  const responses = generatePrimes(
+  generatePrimes(
     { nval, cval, dval, adder, factorize: false, numPrimes },
-    setPrimes,
-    setTimes
+    addPrime,
+    addTime
   );
-
-  return responses;
 };
 
-function generatePrimes(args, setPrimes, setTimes) {
-  let { primes, times } = generatePrimesImpl(args, setPrimes, setTimes);
+function generatePrimes(args, addPrime, addTime) {
+  calcPrimes(args, addPrime, addTime);
 
-  const totalPrimeTime = times.reduce((a, b) => a + b, 0.0);
-
-  return { primes, times, totalPrimeTime };
-}
-
-function generatePrimesImpl(args, setPrimes, setTimes) {
-  const { primes, times } = calcPrimes(args, setPrimes, setTimes);
-
-  const response = {
-    primes,
-    times,
-  };
-  return response;
+  // const totalPrimeTime = times.reduce((a, b) => a + b, 0.0);
 }
 
 export default primes;

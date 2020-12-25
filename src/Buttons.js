@@ -1,25 +1,34 @@
-import React, { useState } from "react";
-import fPrimes from "./functions/primes";
+import React from "react";
 
-export default ({ args, setPrimes, setTimes, setTotalPrimeTime }) => {
-  const [enabled, setEnabled] = useState(true);
+const STOPPED = Symbol(),
+  RUNNING = Symbol();
+export { STOPPED, RUNNING };
 
+export default ({ args, appState, setAppState }) => {
   const action = (args) => {
-    setEnabled(false);
+    setAppState(RUNNING);
+  };
 
-    const { totalPrimeTime } = fPrimes(args, setPrimes, setTimes);
-    setTotalPrimeTime(totalPrimeTime);
-    setEnabled(true);
+  const stopAction = () => {
+    setAppState(STOPPED);
   };
 
   return (
     <div className="row">
-      <div className="double-column">
+      <div className="column">
         <input
           type="button"
           value="Submit"
-          disabled={!enabled}
+          disabled={appState !== STOPPED}
           onClick={() => action(args)}
+        ></input>
+      </div>
+      <div className="column">
+        <input
+          type="button"
+          value="STOP!"
+          disabled={appState !== RUNNING}
+          onClick={() => stopAction()}
         ></input>
       </div>
     </div>

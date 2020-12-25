@@ -2,22 +2,19 @@
 import React, { useState } from "react";
 import "./App.css";
 import Inputs from "./Inputs";
-import Buttons from "./Buttons";
+import Buttons, { STOPPED, RUNNING } from "./Buttons";
 import Results from "./Results";
 import FalsePrimes from "./FalsePrimes.js";
 
 function App() {
-  // const [aval, setAval] = useState(0); //useState(1);
   const [nval, setNval] = useState(0); //useState(31);
   const [cval, setCval] = useState(7); //useState(7);
   const [dval, setDval] = useState(11); //useState(11);
   const [adder, setAdder] = useState(30); //useState(2310);
   const [numPrimes, setNumPrimes] = useState(1);
-  const [primes, setPrimes] = useState([]);
-  const [times, setTimes] = useState([]);
-  // const [results, setResults] = useState({});
-  const [totalPrimeTime, setTotalPrimeTime] = useState(0);
-  const args = { /*aval,*/ nval, cval, dval, adder, numPrimes };
+  const [appState, setAppState] = useState(STOPPED);
+
+  const args = { nval, cval, dval, adder, numPrimes };
 
   return (
     <div className="App">
@@ -34,12 +31,12 @@ function App() {
           setNumPrimes,
         }}
       />
-      <Buttons {...{ args, setPrimes, setTimes, setTotalPrimeTime }} />
+      <Buttons {...{ appState, setAppState }} />
       <hr></hr>
-      <Results {...{ primes, times, totalPrimeTime }} />
+      <Results {...{ args, appState }} />
       <div className="row"></div>
       <hr></hr>
-      <FalsePrimes {...{ primes }} />
+      {/* <FalsePrimes {...{ primes }} /> */}
     </div>
   );
 }

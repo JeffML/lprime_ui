@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { RUNNING } from "./Buttons";
+import fPrimes from "./functions/primes";
 
 const color = (row) => (row % 2 ? "#C3C4C5" : "#F5F3F3");
+let init = true;
 
 const nanoToSec = (time) => {
   var pTime = time.toString().padStart(10, 0);
@@ -12,14 +15,13 @@ const nanoToSec = (time) => {
   return fTime;
 };
 
-// eslint-disable-next-line no-unused-vars
 const Responses = ({ primes, times }) => {
   if (!primes.length) {
-    return <div className="row">Calculating...</div>;
+    return null;
   }
 
   return primes.map((prime, i) => {
-    let time = times[i].toString();
+    let time = times.length && times[i].toString();
 
     const numFormat = (n) => {
       return n.toString(); //.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -50,18 +52,39 @@ const Responses = ({ primes, times }) => {
   });
 };
 
-export default ({ primes, times, totalPrimeTime }) => {
-  if (!primes) {
-    return null;
+export default ({ args, appState }) => {
+  const [primes, setPrimes] = useState([]);
+  const [times, setTimes] = useState([]);
+  let localPrimes = [];
+
+  useEffect(() => console.log({ primes }), [primes]);
+
+  const addPrime = (prime) => {
+    localPrimes = [...localPrimes, prime];
+    setPrimes([...localPrimes]);
+    console.log({ prime });
+  };
+
+  const addTime = (time) => {
+    setTimes([...times, time]);
+  };
+
+  if (appState === RUNNING && init) {
+    init = false;
+    fPrimes({ args, addPrime, addTime });
+    // setTotalPrimeTime(totalPrimeTime);
+  } else {
+    init = true;
   }
 
   return (
     <div>
+      <div>{appState === RUNNING ? "Running..." : "Stopped"}</div>
       <div className="row">
         <div className="column">
           <span style={{ fontWeight: "bold" }}>
             Total calculation time:{" "}
-            {totalPrimeTime && nanoToSec(totalPrimeTime)}
+            {/* {totalPrimeTime && nanoToSec(totalPrimeTime)} */}
           </span>
         </div>
       </div>
