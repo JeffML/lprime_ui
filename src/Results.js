@@ -15,67 +15,57 @@ const nanoToSec = (time) => {
   return fTime;
 };
 
-const Responses = ({ primes, times }) => {
-  if (!primes.length) {
-    return null;
-  }
+const Response = ({ prime, fTime, i }) => {
+  const numFormat = (n) => {
+    return n && n.toString();
+  };
 
-  return primes.map((prime, i) => {
-    let time = times.length && times[i].toString();
-
-    const numFormat = (n) => {
-      return n.toString(); //.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    };
-
-    if (time) {
-      if (navigator.userAgent.includes("Firefox")) time *= 10000;
-      var fTime = nanoToSec(time);
-    }
-    return (
-      <div
-        className="row"
-        style={{
-          maxHeight: "3.4rem",
-          backgroundColor: color(i),
-        }}
-        key={prime}
-      >
-        <div className="column">
-          <span>Prime: {numFormat(prime)}</span>
-          <br></br>
-        </div>
-        <div className="column">
-          <span>Time(sec): {fTime}</span>
-        </div>
+  return (
+    <div
+      className="row"
+      style={{
+        maxHeight: "3.4rem",
+        backgroundColor: color(i),
+      }}
+      key={prime}
+      data_key={prime}
+    >
+      <div className="column">
+        <span>Prime: {numFormat(prime)}</span>
+        <br></br>
       </div>
-    );
-  });
+      <div className="column">
+        <span>Time(sec): {fTime}</span>
+      </div>
+    </div>
+  );
 };
+
+function* testPrimes(addPrime) {
+  const tPrimes = [3, 5, 7];
+  let time = Date.now();
+  let i = 0;
+
+  for (const prime of tPrimes) {
+    console.log("flue!");
+    yield prime;
+  }
+}
 
 export default ({ args, appState }) => {
   const [primes, setPrimes] = useState([]);
-  const [times, setTimes] = useState([]);
-  let localPrimes = [];
-
-  useEffect(() => console.log({ primes }), [primes]);
-
-  const addPrime = (prime) => {
-    localPrimes = [...localPrimes, prime];
-    setPrimes([...localPrimes]);
-    console.log({ prime });
-  };
-
-  const addTime = (time) => {
-    setTimes([...times, time]);
-  };
-
-  if (appState === RUNNING && init) {
-    init = false;
-    fPrimes({ args, addPrime, addTime });
-    // setTotalPrimeTime(totalPrimeTime);
-  } else {
-    init = true;
-  }
+  useEffect(() => {
+    setPrimes((oldPrimes) =>
+      oldPrimes.concat(<Response {...{ prime: 1, key: 1 }} />)
+    );
+    console.log("foo");
+    setTimeout(() => {
+      console.log("bar");
+      setPrimes((oldPrimes) =>
+        oldPrimes.concat(<Response {...{ prime: 2, key: 2 }} />)
+      );
+    }, 1000);
+  }, []);
 
   return (
     <div>
@@ -88,7 +78,7 @@ export default ({ args, appState }) => {
           </span>
         </div>
       </div>
-      <Responses {...{ primes, times }} />
+      <div className="row">{primes}</div>
     </div>
   );
 };
