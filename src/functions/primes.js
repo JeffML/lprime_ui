@@ -13,19 +13,17 @@ Input N can be any prime number >23 that ens in 1, 3, 7, or 9
 //////////////////////////////////////////////
 // this is the outer function, which initiates the calculations.
 /////////////////////////////////////////////
-const calcPrimes = (
-  { nval: N, cval, dval, adder, numPrimes },
-  addPrime,
-  addTime
-) => {
-  N = BigInt(N);
+function* calcPrimes(args) {
+  let { nval = 210, cval, dval, adder } = args;
+  console.log({ args });
+  let N = BigInt(nval);
   let C = BigInt(cval);
   let D = BigInt(dval);
   let B = isqrt(N);
   const Z = BigInt(adder);
 
-  numPrimes = parseInt(numPrimes);
-  let count = 0;
+  // numPrimes = parseInt(numPrimes);
+  // let count = 0;
 
   let func; // current func reference
   let then; // start time of new prime search
@@ -47,20 +45,10 @@ const calcPrimes = (
 
   const lbl11 = () => {
     //LBL 11
-    const now = window.performance.now(); //floating milliseconds
-    const time = (now - then) / 1000;
-    then = now;
-    count++;
-    addPrime(N);
-    addTime(time);
-
-    if (count === numPrimes) return (func = END); // N->P, Disp P (stops on requested number of primes)
-    N += N * Z;
-    B = isqrt(N);
-    C = 7n;
-    D = 11n;
-    func = lbl10;
+    func = YIELDPRIME;
   };
+
+  const YIELDPRIME = () => {}; // marker function
 
   const lbl12 = () => {
     //LBL 12
@@ -80,25 +68,27 @@ const calcPrimes = (
   then = window.performance.now(); // in floating milliseconds
 
   do {
+    if (func === YIELDPRIME) {
+      const now = window.performance.now(); //floating milliseconds
+      const time = (now - then) / 1000;
+      then = now;
+      yield { prime: N, time };
+      // if (count === 4 /* numPrimes */) return (func = END);
+      N += N * Z;
+      B = isqrt(N);
+      C = 7n;
+      D = 11n;
+      func = lbl10;
+      // func = END;
+    }
     func();
   } while (func !== END);
 
   return;
-};
+}
 
-const primes = ({ args: values, addPrime, addTime }) => {
-  const { nval, cval, dval, adder, numPrimes } = values;
-
-  generatePrimes(
-    { nval, cval, dval, adder, factorize: false, numPrimes },
-    addPrime,
-    addTime
-  );
-};
-
-function generatePrimes(args, addPrime, addTime) {
-  calcPrimes(args, addPrime, addTime);
-
+function* primes({ args }) {
+  yield* calcPrimes(args);
   // const totalPrimeTime = times.reduce((a, b) => a + b, 0.0);
 }
 

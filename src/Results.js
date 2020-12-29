@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import React, { useState, useEffect } from "react";
-import { RUNNING } from "./Buttons";
+import React, { useState, useEffect, useRef } from "react";
 import fPrimes from "./functions/primes";
+import Buttons, { STOPPED, RUNNING } from "./Buttons";
 
 const color = (row) => (row % 2 ? "#C3C4C5" : "#F5F3F3");
-let init = true;
 
 const nanoToSec = (time) => {
   var pTime = time.toString().padStart(10, 0);
@@ -15,7 +14,7 @@ const nanoToSec = (time) => {
   return fTime;
 };
 
-const Response = ({ prime, fTime, i }) => {
+const Response = ({ prime, time, i }) => {
   const numFormat = (n) => {
     return n && n.toString();
   };
@@ -27,58 +26,40 @@ const Response = ({ prime, fTime, i }) => {
         maxHeight: "3.4rem",
         backgroundColor: color(i),
       }}
-      key={prime}
-      data_key={prime}
     >
       <div className="column">
         <span>Prime: {numFormat(prime)}</span>
         <br></br>
       </div>
       <div className="column">
-        <span>Time(sec): {fTime}</span>
+        <span>Time(sec): {nanoToSec(time)}</span>
       </div>
     </div>
   );
 };
 
-function* testPrimes(addPrime) {
-  const tPrimes = [3, 5, 7];
-  let time = Date.now();
-  let i = 0;
-
-  for (const prime of tPrimes) {
-    console.log("flue!");
-    yield prime;
-  }
-}
-
-export default ({ args, appState }) => {
+export default (args) => {
   const [primes, setPrimes] = useState([]);
+  const [appState, setAppState] = useState(STOPPED);
+  const primeGen = useRef(fPrimes({ args }));
+
   useEffect(() => {
-    setPrimes((oldPrimes) =>
-      oldPrimes.concat(<Response {...{ prime: 1, key: 1 }} />)
-    );
-    console.log("foo");
-    setTimeout(() => {
-      console.log("bar");
-      setPrimes((oldPrimes) =>
-        oldPrimes.concat(<Response {...{ prime: 2, key: 2 }} />)
-      );
-    }, 1000);
-  }, []);
+    console.log(appState === RUNNING ? "R" : "S");
+    if (appState === RUNNING) {
+      const next = primeGen.current.next().value;
+      if (next) setPrimes((prev) => [next, ...prev]);
+    }
+  }, [appState, primes]);
 
   return (
     <div>
-      <div>{appState === RUNNING ? "Running..." : "Stopped"}</div>
+      <Buttons {...{ appState, setAppState }} />
+      <hr></hr>
       <div className="row">
-        <div className="column">
-          <span style={{ fontWeight: "bold" }}>
-            Total calculation time:{" "}
-            {/* {totalPrimeTime && nanoToSec(totalPrimeTime)} */}
-          </span>
-        </div>
+        {primes.map(({ prime, time, prime: key }) => {
+          return <Response {...{ prime, key, time }} />;
+        })}
       </div>
-      <div className="row">{primes}</div>
     </div>
   );
 };
