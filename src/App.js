@@ -25,9 +25,7 @@ function App() {
           setNumPrimes,
         }}
       />
-
       <Results {...{ nval, cval, dval, adder, numPrimes }} />
-
       <div className="row"></div>
       <hr></hr>
       {/* <FalsePrimes {...{ primes }} /> */}

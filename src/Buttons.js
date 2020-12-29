@@ -4,8 +4,8 @@ const STOPPED = Symbol(),
   RUNNING = Symbol();
 export { STOPPED, RUNNING };
 
-export default ({ args, appState, setAppState }) => {
-  const action = (args) => {
+export default ({ appState, setAppState }) => {
+  const action = () => {
     setAppState(RUNNING);
   };
 
@@ -20,7 +20,7 @@ export default ({ args, appState, setAppState }) => {
           type="button"
           value="Submit"
           disabled={appState !== STOPPED}
-          onClick={() => action(args)}
+          onClick={() => action()}
         ></input>
       </div>
       <div className="column">
